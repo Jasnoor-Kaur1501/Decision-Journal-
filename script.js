@@ -32,7 +32,14 @@ addBtn.addEventListener("click", () => {
     context: contextInput.value,
     expected: expectedInput.value,
     confidence: confidenceInput.value,
-    date: new Date().toISOString().slice(0, 10)
+    function formatDate(dateStr) {
+  return new Date(dateStr).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  });
+}
+
   });
 
   save();
