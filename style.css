@@ -15,11 +15,17 @@ body {
 
 .app {
   width: 420px;
-  background: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.75);
   backdrop-filter: blur(18px);
   padding: 28px;
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  animation: appEnter 0.6s ease;
+}
+
+@keyframes appEnter {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
@@ -60,14 +66,27 @@ button {
   padding: 12px;
   border-radius: 12px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 button:hover {
   background: #4f46e5;
 }
 
+button:active {
+  transform: scale(0.96);
+}
+
 ul {
   list-style: none;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.empty {
+  text-align: center;
+  opacity: 0.6;
+  margin-top: 10px;
 }
 
 .decision {
@@ -76,85 +95,30 @@ ul {
   background: #ffffff;
   border: 1px solid #e5e7eb;
   margin-bottom: 12px;
-  @keyframes thinkIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-    filter: blur(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
+  animation: slideIn 0.35s ease;
+  position: relative;
 }
 
-.decision {
-  animation: thinkIn 0.6s ease forwards;
-}
-
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .decision small {
   opacity: 0.6;
 }
 
-.active {
-  box-shadow: 0 0 0 rgba(99,102,241,0.4);
-  animation: pulse 2.5s infinite;
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(99,102,241,0.25); }
-  70% { box-shadow: 0 0 0 10px rgba(99,102,241,0); }
-  100% { box-shadow: 0 0 0 0 rgba(99,102,241,0); }
-}
-
-button:active {
-  transform: scale(0.96);
-}
-
-#decisionList {
-  max-height: 300px;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-}
-
-.app {
-  animation: appEnter 0.7s ease forwards;
-}
-
-@keyframes appEnter {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.delete-decision {
-  background: transparent;
+.delete {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
   border: none;
   font-size: 18px;
-  opacity: 0.4;
   cursor: pointer;
-
-  .decision {
-  animation: slideIn 0.25s ease;
+  opacity: 0.4;
 }
 
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-  transition: 0.2s;
-}
-
-.delete-decision:hover {
+.delete:hover {
   opacity: 1;
 }
-
